@@ -78,12 +78,13 @@ public class DisplayColor extends CustomDialogPreference<AlertDialog> {
             IntervalSeekBar seekBar = view.findViewById(SEEKBAR_ID[i]);
             TextView value = view.findViewById(SEEKBAR_VALUE_ID[i]);
             mSeekBars[i] = new ColorSeekBar(seekBar, value, i);
-            mSeekBars[i].mSeekBar.setMinimum(0.1f);
+            mSeekBars[i].mSeekBar.setMinimum(20f / 256f);
             mSeekBars[i].mSeekBar.setMaximum(1.0f);
 
             mSeekBars[i].mSeekBar.setProgressFloat(mCurrentColors[i]);
             int percent = Math.round(100F * mCurrentColors[i]);
-            value.setText(String.format("%d%%", percent));
+            int kcalVal = Math.round(256F * mCurrentColors[i]);
+            value.setText(String.format("%d (%d%%)", kcalVal, percent));
         }
     }
 
@@ -204,7 +205,8 @@ public class DisplayColor extends CustomDialogPreference<AlertDialog> {
             }
 
             int percent = Math.round(100F * fp);
-            mValue.setText(String.format("%d%%", percent));
+            int kcalVal = Math.round(256F * fp);
+            mValue.setText(String.format("%d (%d%%)", kcalVal, percent));
         }
 
         @Override
